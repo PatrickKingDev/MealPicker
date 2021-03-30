@@ -1,0 +1,67 @@
+﻿@model MealPicker.Models.ViewModels.MealDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Meal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.meal.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.meal.Name)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.meal.Tags)
+        </dt>
+
+        <dd>
+            @foreach (var tag in Model.tags)
+            {
+                var isChecked = false;
+
+                if (Model.meal.Tags.Select(t => t.Name).ToList().Contains(tag.Name))
+                {
+                    isChecked = true;
+                }
+
+                @Html.CheckBoxFor(m => isChecked, new { id = tag.ID, @class = "toggle", data_url = Url.Action("EditTag", "Meals"), data_meal = Model.meal.ID, @checked = isChecked })
+                <label for="@tag.ID">@tag.Name</label>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.meal.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.toggle').change(function () {
+                var self = $(this);
+                var url = self.data('url');
+                var mealId = self.data('meal')
+                var tagId = self.attr('id');
+                var value = self.prop('checked');
+
+                $.ajax({
+                    url: url,
+                    data: { mealId: mealId, tagId: tagId, isChecked: value },
+                    type: 'POST'
+                });
+            });
+        });
+    </script>
+}

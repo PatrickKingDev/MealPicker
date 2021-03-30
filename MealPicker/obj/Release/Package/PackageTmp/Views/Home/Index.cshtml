@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+
+    foreach (var tag in Model.Tags)
+    {
+        <input type="checkbox" id="@tag.ID" name="chkMeal" value="@tag.Name">
+        <label for="@tag.ID">@tag.Name</label>
+        <br>
+    }
+    <input type="submit" value="Choisir" />
+}
+
+@if (Model.chosenMeal == "") {
+    <div>Désolé, aucun repas ne correspond à ces critères.</div>
+} else if (Model.chosenMeal != null && Model.chosenMeal != "") {
+    <div>Le repas choisi est : @Model.chosenMeal</div>
+}
+
+
+
+
+
+

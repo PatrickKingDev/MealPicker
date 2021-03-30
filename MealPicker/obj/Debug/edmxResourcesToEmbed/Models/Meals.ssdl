@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MealPickerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Meals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Meals_Tags">
+    <Key>
+      <PropertyRef Name="Meal_ID" />
+      <PropertyRef Name="Tag_ID" />
+    </Key>
+    <Property Name="Meal_ID" Type="int" Nullable="false" />
+    <Property Name="Tag_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Meals_Tags_Meals">
+    <End Role="Meals" Type="Self.Meals" Multiplicity="1" />
+    <End Role="Meals_Tags" Type="Self.Meals_Tags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meals">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Meals_Tags">
+        <PropertyRef Name="Meal_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meals_Tags_Tags">
+    <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+    <End Role="Meals_Tags" Type="Self.Meals_Tags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tags">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Meals_Tags">
+        <PropertyRef Name="Tag_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MealPickerModelStoreContainer">
+    <EntitySet Name="Meals" EntityType="Self.Meals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Meals_Tags" EntityType="Self.Meals_Tags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Meals_Tags_Meals" Association="Self.FK_Meals_Tags_Meals">
+      <End Role="Meals" EntitySet="Meals" />
+      <End Role="Meals_Tags" EntitySet="Meals_Tags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meals_Tags_Tags" Association="Self.FK_Meals_Tags_Tags">
+      <End Role="Tags" EntitySet="Tags" />
+      <End Role="Meals_Tags" EntitySet="Meals_Tags" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MealPickerEntities-Web.config Connection String" description="MealPickerEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Meals.csdl|res://*/Models.Meals.ssdl|res://*/Models.Meals.msl;provider=System.Data.SqlClient;provider connection string='data source=&quot;WIN-HOME\SQLEXPRESS, 49172&quot;;initial catalog=MealPicker;persist security info=True;user id=MealPicker_RW;password=wwALQK2SH_p5;MultipleActiveResultSets=True;App=EntityFramework'" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\patri\\source\\repos\\MealPicker\\MealPicker\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MealPickerEntities']/@connectionString" />
+  </parameter>
+</parameters>
