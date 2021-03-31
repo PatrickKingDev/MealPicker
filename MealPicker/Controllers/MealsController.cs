@@ -20,7 +20,7 @@ namespace MealPicker.Controllers
         // GET: Meals
         public ActionResult Index()
         {
-            return View(db.Meals.ToList());
+            return View(db.Meals.ToList().OrderBy(m => m.Name));
         }
 
         // GET: Meals/Details/5
